@@ -89,7 +89,7 @@ namespace Aiuk.Common.Utility
         public static Dictionary<string, Type> GetTypeDictionary<T>(
             List<Assembly> assemblies = null, Func<Type, bool> whereFunc = null)
         {
-            assemblies = assemblies ?? new List<Assembly> {Assembly.GetExecutingAssembly()};
+            assemblies = assemblies ?? new List<Assembly> { Assembly.GetExecutingAssembly() };
             var typeDictionary = new Dictionary<string, Type>();
 
             foreach (var assembly in assemblies)
@@ -135,14 +135,14 @@ namespace Aiuk.Common.Utility
         public static List<Type> GetTypeList<T>(bool isInterface = false, bool isAbstract = false,
             params Assembly[] assemblies)
         {
-            var asemList = assemblies != null
+            var asemList = assemblies.Length != 0
                 ? assemblies.ToList()
-                : new List<Assembly> {Assembly.GetExecutingAssembly()};
+                : new List<Assembly> { Assembly.GetExecutingAssembly() };
             var asmTypes = new List<Type>();
 
             foreach (var assembly in asemList)
             {
-                var types = GetTypeList<T>(assembly);
+                var types = GetTypeList<T>(assembly, isInterface, isAbstract);
                 asmTypes.AddRange(types);
             }
 
